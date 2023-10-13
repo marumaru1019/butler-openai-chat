@@ -10,16 +10,17 @@ from core.modelhelper import get_gpt_model, get_max_token_from_messages
 import json
 from approaches.functioncalling import get_current_time
 
+# Function calling に追加する関数を定義
 functions = [
     {
         "name": "get_current_time",
-        "description": "Get the current time in a given location",
+        "description": "与えられた場所の現地時間を取得します。",
         "parameters": {
             "type": "object",
             "properties": {
                 "location": {
                     "type": "string",
-                    "description": "The location name. The pytz is used to get the timezone for that location. Location names should be in a format like America/New_York, Asia/Bangkok, Europe/London",
+                    "description": "現地時間を取得したい場所です. 場所の引数の形式は、America/New_York, Asia/Bangkok, Europe/London のようである必要があります。",
                 }
             },
             "required": ["location"],
@@ -105,12 +106,12 @@ class ChatReadApproach(Approach):
                 
                 response_text = response.choices[0]["message"]
                 
-            print("final message")
             print("----------------------------------------")
+            print("final message")
             print(messages)
 
-            print("final response")
             print("----------------------------------------")
+            print("final response")
             print(response_text["content"])
 
         # logging
